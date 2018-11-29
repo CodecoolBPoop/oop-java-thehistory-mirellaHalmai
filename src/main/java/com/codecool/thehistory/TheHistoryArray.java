@@ -12,12 +12,13 @@ public class TheHistoryArray implements TheHistory {
     @Override
     public void add(String text) {
         String[] wordsToAdd = text.split("\\s+");
-        int oldLength = wordsArray.length;
         String[] oldWordsArray = wordsArray;
-        int newLength = wordsToAdd.length + oldLength;
+        int oldLength = wordsArray.length;
+        int toAddLength = wordsToAdd.length;
+        int newLength = toAddLength + oldLength;
         wordsArray = new String[newLength];
         System.arraycopy(oldWordsArray, 0, wordsArray, 0, oldLength);
-        System.arraycopy(wordsToAdd, 0, wordsArray, oldLength, wordsToAdd.length);
+        System.arraycopy(wordsToAdd, 0, wordsArray, oldLength, toAddLength);
     }
 
     @Override
@@ -61,7 +62,7 @@ public class TheHistoryArray implements TheHistory {
         int toLength = toWords.length;
         int newLength = oldLength;
         if (toLength > fromLength) {
-            newLength += Math.floorDiv(oldLength, toLength) * (toLength - fromLength);
+            newLength += Math.floorDiv(oldLength, fromLength) * (toLength - fromLength);
         }
         String[] newWordsArray = new String[newLength];
         while (oldArrayIndex < oldLength) {
@@ -90,22 +91,5 @@ public class TheHistoryArray implements TheHistory {
         }
         if (sb.length() > 0) sb.deleteCharAt(sb.length() - 1); // last space char
         return sb.toString();
-    }
-
-    public static void main(String[] args) {
-        String string = "Test this and this and this also this if you can";
-        String[] from = {"that", "and"};
-        String[] to = {"not", "this"};
-        TheHistoryArray history = new TheHistoryArray();
-        history.add(string);
-        System.out.println(history.toString());
-        history.replaceOneWord("this", "that");
-        System.out.println(history.toString());
-        history.replaceMoreWords(from, to);
-        System.out.println(history.toString());
-        history.removeWord("this");
-        System.out.println(history.toString());
-        history.clear();
-        System.out.println(history.toString());
     }
 }
