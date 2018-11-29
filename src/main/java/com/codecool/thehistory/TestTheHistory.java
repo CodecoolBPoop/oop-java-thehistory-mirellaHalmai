@@ -19,7 +19,7 @@ import java.io.IOException;
  * You'll learn about unit testing later but some small info:
  * - you can't test every possibility so test some good and bad cases
  * But how to decide what to test?
- * - always test with good values but 1-2 test usually is engough
+ * - always test with good values but 1-2 tests are usually enough
  * - always test the _corner cases_
  * What are the corner cases?
  * Those are the special cases:
@@ -30,8 +30,8 @@ import java.io.IOException;
  * */
 
 /**
- * NOTE: this class doesn't use any official Unit Test framework but made by hand.
- * Later when the Unit testing gets introduced we'll use more sofisticated testing.
+ * NOTE: this class doesn't use any official Unit Test frameworks, it's made by hand.
+ * Later when the Unit testing gets introduced we'll use more sophisticated testing.
  */
 public class TestTheHistory {
 
@@ -160,7 +160,7 @@ public class TestTheHistory {
     }
 
     /**
-     * Performance testing. After all the functionality test passes, the next thing to take care of is the performance.
+     * Performance testing. After all the functionality tests pass, the next thing to take care of is the performance.
      * Can you make your code faster? And no, you shouldn't change the tests.
      *
      * @param theHistory interface to TheHistory implementation
@@ -226,17 +226,17 @@ public class TestTheHistory {
     public static void main(String[] args) {
         System.out.println("****** Functionality Tests - Array *******");
         runAllFunctionalityTests(new TheHistoryArray());
-        System.out.println("****** Functionality Tests - ArrayList *******");
-        runAllFunctionalityTests(new TheHistoryArrayList());
-        System.out.println("****** Functionality Tests - LinkedList *******");
-        runAllFunctionalityTests(new TheHistoryLinkedList());
+        //System.out.println("****** Functionality Tests - ArrayList *******");
+        //runAllFunctionalityTests(new TheHistoryArrayList());
+        //System.out.println("****** Functionality Tests - LinkedList *******");
+        //runAllFunctionalityTests(new TheHistoryLinkedList());
 
         System.out.println("****** Array Tests *******");
         runAllPerformanceTests(new TheHistoryArray());
-        System.out.println("****** ArrayList Tests *******");
-        runAllPerformanceTests(new TheHistoryArrayList());
-        System.out.println("****** LinkedList Tests *******");
-        runAllPerformanceTests(new TheHistoryLinkedList());
+        //System.out.println("****** ArrayList Tests *******");
+        //runAllPerformanceTests(new TheHistoryArrayList());
+        //System.out.println("****** LinkedList Tests *******");
+        //runAllPerformanceTests(new TheHistoryLinkedList());
     }
 
 }
