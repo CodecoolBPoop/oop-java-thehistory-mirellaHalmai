@@ -30,13 +30,39 @@ public class TheHistoryArrayList implements TheHistory {
 
     @Override
     public void replaceOneWord(String from, String to) {
-        //TODO: check the TheHistory interface for more information
-
+        for (int i = 0; i < size(); i++) {
+            if (wordsArrayList.get(i).equals(from)) {
+                wordsArrayList.set(i, to);
+            }
+        }
     }
 
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
         //TODO: check the TheHistory interface for more information
+        ArrayList<String> newWordsArrayList = new ArrayList<String>();
+        ArrayList<String> fromWordsList = new ArrayList<>(Arrays.asList(fromWords));
+        ArrayList<String> toWordsList = new ArrayList<>(Arrays.asList(toWords));
+        int fromLength = fromWords.length;
+        int toLength = toWords.length;
+        int originalSize = size();
+        int originalIndex = 0;
+        int newIndex = 0;
+        while (originalIndex < originalSize) {
+            if (originalIndex > originalSize - fromLength) {
+                newWordsArrayList.addAll(wordsArrayList.subList(originalIndex, originalSize));
+            } else if (!wordsArrayList.get(originalIndex).equals(fromWords[0]) ||
+                    !wordsArrayList.subList(originalIndex, originalIndex + fromLength).equals(fromWordsList)) {
+                newWordsArrayList.add(wordsArrayList.get(originalIndex));
+                newIndex++;
+                originalIndex++;
+            } else {
+                newWordsArrayList.addAll(toWordsList);
+                newIndex += toLength;
+                originalIndex += fromLength;
+            }
+        }
+        wordsArrayList = newWordsArrayList;
     }
 
     @Override
@@ -57,14 +83,14 @@ public class TheHistoryArrayList implements TheHistory {
         TheHistoryArray history = new TheHistoryArray();
         history.add(string);
         System.out.println(history.toString());
-        //history.replaceOneWord("this", "that");
-        //System.out.println(history.toString());
-        //history.replaceMoreWords(from, to);
-        //System.out.println(history.toString());
-        history.removeWord("this");
+        history.replaceOneWord("this", "that");
         System.out.println(history.toString());
-        //history.clear();
-        //System.out.println(history.toString());
+        history.replaceMoreWords(from, to);
+        System.out.println(history.toString());
+        history.removeWord("that");
+        System.out.println(history.toString());
+        history.clear();
+        System.out.println(history.toString());
     }
 
 }

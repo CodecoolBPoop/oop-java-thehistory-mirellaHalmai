@@ -13,7 +13,7 @@ public class TheHistoryArray implements TheHistory {
     public void add(String text) {
         String[] wordsToAdd = text.split("\\s+");
         String[] oldWordsArray = wordsArray;
-        int oldLength = wordsArray.length;
+        int oldLength = size();
         int toAddLength = wordsToAdd.length;
         int newLength = toAddLength + oldLength;
         wordsArray = new String[newLength];
@@ -23,7 +23,7 @@ public class TheHistoryArray implements TheHistory {
 
     @Override
     public void removeWord(String wordToBeRemoved) {
-        String[] newWordsArray = new String[wordsArray.length];
+        String[] newWordsArray = new String[size()];
         int resultIndex = 0;
         for (String word : wordsArray) {
             if (!word.equals(wordToBeRemoved)) {
@@ -45,9 +45,8 @@ public class TheHistoryArray implements TheHistory {
 
     @Override
     public void replaceOneWord(String from, String to) {
-        for (int i = 0; i < wordsArray.length; i++) {
-            String word = wordsArray[i];
-            if (word.equals(from)) {
+        for (int i = 0; i < size(); i++) {
+            if (wordsArray[i].equals(from)) {
                 wordsArray[i] = to;
             }
         }
@@ -55,7 +54,7 @@ public class TheHistoryArray implements TheHistory {
 
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
-        int oldLength = wordsArray.length;
+        int oldLength = size();
         int oldArrayIndex = 0;
         int newArrayIndex = 0;
         int fromLength = fromWords.length;
