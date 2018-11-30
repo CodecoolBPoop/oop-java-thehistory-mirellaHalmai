@@ -1,9 +1,6 @@
 package com.codecool.thehistory;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class TheHistoryArrayList implements TheHistory {
     /**
@@ -14,11 +11,14 @@ public class TheHistoryArrayList implements TheHistory {
     @Override
     public void add(String text) {
         //TODO: check the TheHistory interface for more information
+        wordsArrayList.addAll(Arrays.asList(text.split("\\s+")));
     }
 
     @Override
     public void removeWord(String wordToBeRemoved) {
         //TODO: check the TheHistory interface for more information
+        ArrayList<String> toRemove = new ArrayList<String>(Arrays.asList(wordToBeRemoved));
+        wordsArrayList.removeAll(toRemove);
     }
 
     @Override
@@ -50,6 +50,24 @@ public class TheHistoryArrayList implements TheHistory {
         }
         if (sb.length() > 0) sb.deleteCharAt(sb.length() - 1); // last space char
         return sb.toString();
+    }
+
+
+    public static void main(String[] args) {
+        String string = "Test this and this and this also this if you can";
+        String[] from = {"that", "and"};
+        String[] to = {"not", "this"};
+        TheHistoryArray history = new TheHistoryArray();
+        history.add(string);
+        System.out.println(history.toString());
+        //history.replaceOneWord("this", "that");
+        //System.out.println(history.toString());
+        //history.replaceMoreWords(from, to);
+        //System.out.println(history.toString());
+        history.removeWord("this");
+        System.out.println(history.toString());
+        //history.clear();
+        //System.out.println(history.toString());
     }
 
 }
