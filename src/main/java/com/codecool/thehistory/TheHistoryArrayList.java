@@ -45,18 +45,18 @@ public class TheHistoryArrayList implements TheHistory {
         ArrayList<String> toWordsList = new ArrayList<>(Arrays.asList(toWords));
         int fromLength = fromWords.length;
         int oldSize = size();
-        int oldIndex = 0;
-        while (oldIndex < oldSize) {
-            if (oldIndex > oldSize - fromLength) {
-                newWordsArrayList.addAll(wordsArrayList.subList(oldIndex, oldSize));
-                oldIndex = oldSize;
-            } else if (!wordsArrayList.get(oldIndex).equals(fromWords[0]) ||
-                    !wordsArrayList.subList(oldIndex, oldIndex + fromLength).equals(fromWordsList)) {
-                newWordsArrayList.add(wordsArrayList.get(oldIndex));
-                oldIndex++;
+        int index = 0;
+        while (index < oldSize) {
+            if (index > oldSize - fromLength) {
+                newWordsArrayList.addAll(wordsArrayList.subList(index, oldSize));
+                break;
+            } else if (!wordsArrayList.get(index).equals(fromWords[0]) ||
+                    !wordsArrayList.subList(index, index + fromLength).equals(fromWordsList)) {
+                newWordsArrayList.add(wordsArrayList.get(index));
+                index++;
             } else {
                 newWordsArrayList.addAll(toWordsList);
-                oldIndex += fromLength;
+                index += fromLength;
             }
         }
         wordsArrayList = newWordsArrayList;

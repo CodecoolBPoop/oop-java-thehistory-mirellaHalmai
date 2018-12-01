@@ -1,17 +1,20 @@
 package com.codecool.thehistory;
 
 import java.util.*;
+import java.util.LinkedList;
 
 public class TheHistoryLinkedList implements TheHistory {
     /**
      * This implementation should use a String LinkedList so don't change that!
      */
-    private List<String> wordsLinkedList = new LinkedList<>();
+    private LinkedList<String> wordsLinkedList = new LinkedList<>();
 
     @Override
     public void add(String text) {
-        LinkedList<String> toAdd = new LinkedList<>(Arrays.asList(text.split("\\s")));
-        wordsLinkedList.addAll(toAdd);
+        List<String> toAdd = new LinkedList<>(Arrays.asList(text.split("\\s")));
+        for (String word : toAdd) {
+            wordsLinkedList.add(word);
+        }
     }
 
     @Override
@@ -46,6 +49,50 @@ public class TheHistoryLinkedList implements TheHistory {
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
         //TODO: check the TheHistory interface for more information
+        LinkedList<String> newList = new LinkedList<>();
+        ListIterator<String> words = wordsLinkedList.listIterator();
+        LinkedList<String> fromLinkedList = new LinkedList<>(Arrays.asList(fromWords));
+        String firstFromWord = fromLinkedList.removeFirst();
+        int fromLength = fromWords.length;
+        LinkedList<String> toLinkedList = new LinkedList<>(Arrays.asList(toWords));
+
+        while (size() > 0) {
+            if (size() < fromLength) {
+                newList.addAll(wordsLinkedList);
+                break;
+            } else {
+                String nextWord = wordsLinkedList.removeFirst();
+                if (!nextWord.equals(firstFromWord)) {
+                    newList.add(nextWord);
+                } else {
+                    LinkedList<String> temporary = new LinkedList<>();
+                    temporary.add(nextWord);
+                    boolean allWordsEqual = true;
+                    for (String fromWord : fromLinkedList) {
+                        nextWord = wordsLinkedList.removeFirst();
+                        if (!nextWord.equals(fromWord)) {
+                            newList.addAll(temporary);
+                            wordsLinkedList.addFirst(nextWord);
+                            allWordsEqual = false;
+                            break;
+                        }
+                        temporary.add(nextWord);
+                    }
+                    if (allWordsEqual) {
+                        newList.addAll(toLinkedList);
+                    }
+                }
+            }
+        }
+        wordsLinkedList = newList;
+
+        //while (words.hasNext()) {
+        //    if (words.nextIndex() > size() - fromLength) {
+        //        words.forEachRemaining(word -> newList.add(word));
+        //    } else if (!words.next().equals(firstFromWord)) {
+
+        //    }
+        //}
     }
 
     @Override
@@ -67,8 +114,8 @@ public class TheHistoryLinkedList implements TheHistory {
         System.out.println(history.toString());
         history.replaceOneWord("this", "that");
         System.out.println(history.toString());
-        //history.replaceMoreWords(from, to);
-        //System.out.println(history.toString());
+        history.replaceMoreWords(from, to);
+        System.out.println(history.toString());
         history.removeWord("that");
         System.out.println(history.toString());
         history.clear();

@@ -228,15 +228,15 @@ public class TestTheHistory {
         runAllFunctionalityTests(new TheHistoryArray());
         System.out.println("****** Functionality Tests - ArrayList *******");
         runAllFunctionalityTests(new TheHistoryArrayList());
-        //System.out.println("****** Functionality Tests - LinkedList *******");
-        //runAllFunctionalityTests(new TheHistoryLinkedList());
+        System.out.println("****** Functionality Tests - LinkedList *******");
+        runAllFunctionalityTests(new TheHistoryLinkedList());
 
         System.out.println("****** Array Tests *******");
         runAllPerformanceTests(new TheHistoryArray());
         System.out.println("****** ArrayList Tests *******");
         runAllPerformanceTests(new TheHistoryArrayList());
-        //System.out.println("****** LinkedList Tests *******");
-        //runAllPerformanceTests(new TheHistoryLinkedList());
+        System.out.println("****** LinkedList Tests *******");
+        runAllPerformanceTests(new TheHistoryLinkedList());
     }
 
 }
