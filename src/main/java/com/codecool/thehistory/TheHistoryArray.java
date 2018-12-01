@@ -11,7 +11,7 @@ public class TheHistoryArray implements TheHistory {
 
     @Override
     public void add(String text) {
-        String[] wordsToAdd = text.split("\\s+");
+        String[] wordsToAdd = text.split("\\s");
         String[] oldWordsArray = wordsArray;
         int oldLength = size();
         int toAddLength = wordsToAdd.length;

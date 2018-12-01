@@ -10,7 +10,7 @@ public class TheHistoryArrayList implements TheHistory {
 
     @Override
     public void add(String text) {
-        wordsArrayList.addAll(Arrays.asList(text.split("\\s+")));
+        wordsArrayList.addAll(Arrays.asList(text.split("\\s")));
     }
 
     @Override
@@ -25,7 +25,7 @@ public class TheHistoryArrayList implements TheHistory {
 
     @Override
     public void clear() {
-        wordsArrayList = new ArrayList<String>();
+        wordsArrayList = new ArrayList<>();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class TheHistoryArrayList implements TheHistory {
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
         //TODO: check the TheHistory interface for more information
-        ArrayList<String> newWordsArrayList = new ArrayList<String>();
+        ArrayList<String> newWordsArrayList = new ArrayList<>();
         ArrayList<String> fromWordsList = new ArrayList<>(Arrays.asList(fromWords));
         ArrayList<String> toWordsList = new ArrayList<>(Arrays.asList(toWords));
         int fromLength = fromWords.length;
@@ -71,23 +71,4 @@ public class TheHistoryArrayList implements TheHistory {
         if (sb.length() > 0) sb.deleteCharAt(sb.length() - 1); // last space char
         return sb.toString();
     }
-
-
-    public static void main(String[] args) {
-        String string = "Test this and this and this also this if you can";
-        String[] from = {"that", "and"};
-        String[] to = {"not", "this"};
-        TheHistoryArray history = new TheHistoryArray();
-        history.add(string);
-        System.out.println(history.toString());
-        history.replaceOneWord("this", "that");
-        System.out.println(history.toString());
-        history.replaceMoreWords(from, to);
-        System.out.println(history.toString());
-        history.removeWord("that");
-        System.out.println(history.toString());
-        history.clear();
-        System.out.println(history.toString());
-    }
-
 }
