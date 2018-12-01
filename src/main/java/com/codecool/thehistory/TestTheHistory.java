@@ -147,6 +147,11 @@ public class TestTheHistory {
             System.out.println("replace() IS NOT WORKING AS EXPECTED!");
         }
 
+        result = runFunctionalityTest(theHistory, sourceText, "me me replace", "REPLACE");
+        if (!"replace replace me replace me REPLACE me me".equals(result)) {
+            System.out.println("replace() IS NOT WORKING AS EXPECTED!");
+        }
+
         result = runFunctionalityTest(theHistory, sourceText, sourceText, "REPLACE");
         if (!"REPLACE".equals(result)) {
             System.out.println("replace() IS NOT WORKING AS EXPECTED!");

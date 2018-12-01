@@ -53,29 +53,13 @@ public class TheHistoryLinkedList implements TheHistory {
                 newList.addAll(wordsLinkedList);
                 break;
             } else {
-                String nextWord = wordsLinkedList.removeFirst();
-                if (!nextWord.equals(firstFromWord)) {
-                    newList.add(nextWord);
+                String word = wordsLinkedList.removeFirst();
+                if (!word.equals(firstFromWord) || !wordsLinkedList.subList(0, fromLength - 1).equals(fromLinkedList)) {
+                    newList.add(word);
                 } else {
-                    LinkedList<String> temporary = new LinkedList<>();
-                    temporary.add(nextWord);
-                    boolean allWordsEqual = true;
-                    for (String fromWord : fromLinkedList) {
-                        nextWord = wordsLinkedList.removeFirst();
-                        if (!nextWord.equals(fromWord)) {
-                            if (nextWord.equals(firstFromWord)) {
-                                wordsLinkedList.addFirst(nextWord);
-                            } else {
-                                temporary.add(nextWord);
-                            }
-                            newList.addAll(temporary);
-                            allWordsEqual = false;
-                            break;
-                        }
-                        temporary.add(nextWord);
-                    }
-                    if (allWordsEqual) {
-                        newList.addAll(toLinkedList);
+                    newList.addAll(toLinkedList);
+                    for (int i = 0; i < fromLength - 1; i++) {
+                        wordsLinkedList.removeFirst();
                     }
                 }
             }
