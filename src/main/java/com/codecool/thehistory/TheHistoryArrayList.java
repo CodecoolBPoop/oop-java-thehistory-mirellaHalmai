@@ -44,22 +44,19 @@ public class TheHistoryArrayList implements TheHistory {
         ArrayList<String> fromWordsList = new ArrayList<>(Arrays.asList(fromWords));
         ArrayList<String> toWordsList = new ArrayList<>(Arrays.asList(toWords));
         int fromLength = fromWords.length;
-        int toLength = toWords.length;
-        int originalSize = size();
-        int originalIndex = 0;
-        int newIndex = 0;
-        while (originalIndex < originalSize) {
-            if (originalIndex > originalSize - fromLength) {
-                newWordsArrayList.addAll(wordsArrayList.subList(originalIndex, originalSize));
-            } else if (!wordsArrayList.get(originalIndex).equals(fromWords[0]) ||
-                    !wordsArrayList.subList(originalIndex, originalIndex + fromLength).equals(fromWordsList)) {
-                newWordsArrayList.add(wordsArrayList.get(originalIndex));
-                newIndex++;
-                originalIndex++;
+        int oldSize = size();
+        int oldIndex = 0;
+        while (oldIndex < oldSize) {
+            if (oldIndex > oldSize - fromLength) {
+                newWordsArrayList.addAll(wordsArrayList.subList(oldIndex, oldSize));
+                oldIndex = oldSize;
+            } else if (!wordsArrayList.get(oldIndex).equals(fromWords[0]) ||
+                    !wordsArrayList.subList(oldIndex, oldIndex + fromLength).equals(fromWordsList)) {
+                newWordsArrayList.add(wordsArrayList.get(oldIndex));
+                oldIndex++;
             } else {
                 newWordsArrayList.addAll(toWordsList);
-                newIndex += toLength;
-                originalIndex += fromLength;
+                oldIndex += fromLength;
             }
         }
         wordsArrayList = newWordsArrayList;
