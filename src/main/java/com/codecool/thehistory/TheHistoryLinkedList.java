@@ -11,36 +11,29 @@ public class TheHistoryLinkedList implements TheHistory {
 
     @Override
     public void add(String text) {
-        List<String> toAdd = new LinkedList<>(Arrays.asList(text.split("\\s")));
-        for (String word : toAdd) {
-            wordsLinkedList.add(word);
-        }
+        Collections.addAll(wordsLinkedList, text.split("\\s+"));
     }
 
     @Override
     public void removeWord(String wordToBeRemoved) {
-        //TODO: check the TheHistory interface for more information
-        wordsLinkedList.removeIf(word -> (word.equals(wordToBeRemoved)));
+        wordsLinkedList.removeIf(word -> (word.contentEquals(wordToBeRemoved)));
     }
 
     @Override
     public int size() {
-        //TODO: check the TheHistory interface for more information
         return wordsLinkedList.size();
     }
 
     @Override
     public void clear() {
-        //TODO: check the TheHistory interface for more information
         wordsLinkedList = new LinkedList<>();
     }
 
     @Override
     public void replaceOneWord(String from, String to) {
-        //TODO: check the TheHistory interface for more information
         ListIterator<String> words = wordsLinkedList.listIterator();
         while (words.hasNext()) {
-            if (words.next().equals(from)) {
+            if (words.next().contentEquals(from)) {
                 words.set(to);
             }
         }
@@ -48,7 +41,6 @@ public class TheHistoryLinkedList implements TheHistory {
 
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
-        //TODO: check the TheHistory interface for more information
         LinkedList<String> fromLinkedList = new LinkedList<>(Arrays.asList(fromWords));
         LinkedList<String> toLinkedList = new LinkedList<>(Arrays.asList(toWords));
         ListIterator<String> words = wordsLinkedList.listIterator();
@@ -58,11 +50,11 @@ public class TheHistoryLinkedList implements TheHistory {
         while (words.nextIndex() <= size() - fromLength) {
             int nextElementIndex = words.nextIndex();
             String nextWord = words.next();
-            if (nextWord.equals(firstFromWord)) {
+            if (nextWord.contentEquals(firstFromWord)) {
                 boolean allWordsEqual = true;
                 for (String fromWord : fromLinkedList) {
                     String followingWordToCheck = words.next();
-                    if (!followingWordToCheck.equals(fromWord)) {
+                    if (!followingWordToCheck.contentEquals(fromWord)) {
                         allWordsEqual = false;
                         break;
                     }

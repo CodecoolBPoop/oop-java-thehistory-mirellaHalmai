@@ -10,7 +10,7 @@ public class TheHistoryArrayList implements TheHistory {
 
     @Override
     public void add(String text) {
-        wordsArrayList.addAll(Arrays.asList(text.split("\\s")));
+        wordsArrayList.addAll(Arrays.asList(text.split("\\s+")));
     }
 
     @Override
